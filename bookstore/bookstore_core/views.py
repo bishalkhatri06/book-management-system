@@ -7,7 +7,7 @@ from .forms import BookForm
 # Creating a View to List Books
 def book_list(request):
     books = Book.objects.all() # querying all books from the database
-    return render(request, 'books/book_list.html',{'books': books})
+    return render(request, 'book_list.html',{'books': books})
 
 
 # creating view to add a new book
@@ -21,5 +21,5 @@ def book_add(request):
     else:
         form = BookForm()
 
-    return render(request, 'books/book_add.html', {'form': form})
+    return render(request, 'book_add.html', {'form': form})
 
