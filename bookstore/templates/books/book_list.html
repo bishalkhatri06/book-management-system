@@ -1,0 +1,38 @@
+<!-- templates/books/book_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Book List{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto p-4">
+        <h2 class="text-2xl font-bold mb-4">Book List</h2>
+    <table  class="min-w-full bg-white">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b">Title</th>
+                <th class="py-2 px-4 border-b">Author</th>
+                <th class="py-2 px-4 border-b">Price</th>
+                <th class="py-2 px-4 border-b">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td class="py-2 px-4 border-b">{{ book.title }}</td>
+                <td class="py-2 px-4 border-b">{{ book.authors.all|join:", " }}</td>
+                <td class="py-2 px-4 border-b">${{ book.price }}</td>
+                <td class="py-2 px-4 border-b">
+                <a href="{% url 'book_detail' book.id %}" class="text-blue-500 hover:underline">View Details</a>
+            </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="py-2 px-4">No books available.</td>
+            
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'book_add' %}" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded">Add a new book</a>
+    </div>
+{% endblock %}
