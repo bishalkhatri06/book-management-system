@@ -7,8 +7,8 @@ from django.db import models
 
 class Publisher(models.Model):
     name = models.CharField(max_length=100)
-    address = models.TextField()
-    contact = models.CharField(max_length=100, blank=True)
+    address = models.CharField(max_length=200)
+    contact = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
@@ -41,12 +41,12 @@ class Book(models.Model):
 # Let’s assume that books can have multiple authors, so this model will allow for flexibility.
 
 class Author(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
     bio = models.TextField()
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.name}'
 
 
 

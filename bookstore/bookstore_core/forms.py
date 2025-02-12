@@ -5,23 +5,24 @@ from .models import Book, Publisher, Author, Category, BookInventory
 class PublisherForm(forms.ModelForm):
     class Meta:
         model = Publisher
-        fields = ['name', 'address', 'contact']
-
+        # fields = ['name', 'address', 'contact']
+        fields = '__all__'
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'w-full p-2 border rounded'}),
-            'address': forms.Textarea(attrs={'class': 'w-full p-2 border rounded'}),
-            'contact': forms.TextInput(attrs={'class': 'w-full p-2 border rounded'}),
+            'name': forms.TextInput(attrs={'class': 'w-full p-2 border rounded'}),  # adding css class to the input field
+            'address': forms.TextInput(attrs={'class': 'w-full p-2 border rounded'}) ,  # adding css class to the textarea field
+            'contact': forms.TextInput(attrs={'class': 'w-full p-2 border rounded'}),  # adding css class to the input field
         }
+
 
 # model for create new author
 class AuthorForm(forms.ModelForm):
     class Meta:
         model = Author
-        fields = ['first_name', 'last_name', 'bio']
+        fields = ['name', 'email', 'bio']
 
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'w-full p-2 border rounded'}),
-            'last_name': forms.TextInput(attrs={'class': 'w-full p-2 border rounded'}),
+            'name': forms.TextInput(attrs={'class': 'w-full p-2 border rounded'}),
+            'email': forms.TextInput(attrs={'class': 'w-full p-2 border rounded'}),
             'bio': forms.Textarea(attrs={'class': 'w-full p-2 border rounded'}),
         }   
 

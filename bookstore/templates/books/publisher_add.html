@@ -1,9 +1,20 @@
 {% extends 'base.html' %}
+
+{% block title %}Add Publisher{% endblock %}
+
 {% block content %}
-    <h1 class="text-2xl font-bold">Add Publisher</h1>
-    <form method="post" class="space-y-4">
+<div class="mt-4"></div>
+    <a href="{% url 'publisher_list' %}" class="text-blue-500">Back to Publisher List</a>
+</div>
+<h2 class="text-2xl font-bold mb-4 text-center">Add Publisher</h2>
+<div class="max-w-md mx-auto bg-gray-100 p-6 rounded shadow-md">
+    <form method="post" action="{% url 'publisher_add' %}">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">Add Publisher</button>
+        <div class="space-y-4">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded mt-2">Add Publisher</button>
+        
     </form>
+</div>
 {% endblock %}

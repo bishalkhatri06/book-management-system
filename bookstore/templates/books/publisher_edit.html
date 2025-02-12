@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Publisher{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto py-8">
+    <h2 class="text-2xl font-bold mb-6 text-center">Edit Publisher</h2>
+    <div class="max-w-md mx-auto bg-gray-100 p-6 rounded shadow-md">
+    <form method="POST" action="{% url 'publisher_edit' publisher.id %}" class="space-y-6">
+        {% csrf_token %}
+        <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+            <input type="text" name="name" id="name" value="{{ publisher.name }}" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <div>
+            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+            <input type="text" name="address" id="address" value="{{ publisher.address }}" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <div>
+            <label for="contact" class="block text-sm font-medium text-gray-700">Contact</label>
+            <input type="text" name="contact" id="contact" value="{{ publisher.contact }}" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        <div class="flex justify-end">
+            <button type="submit"
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Save Changes
+            </button>
+        </div>
+    </form>
+    </div>
+</div>
+{% endblock %}

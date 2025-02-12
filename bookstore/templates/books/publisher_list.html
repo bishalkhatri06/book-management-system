@@ -1,19 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1 class="text-2xl font-bold mb-2">Publishers</h1>
-    <a href="{% url 'publisher_add' %}" class="px-4 py-2 bg-blue-500 text-white rounded">Add Publisher</a>
     <table class="w-full border-collapse mt-4">
         <tr class="bg-gray-200">
             <th class="p-2 border">Name</th>
             <th class="p-2 border">Address</th>
             <th class="p-2 border">Contact</th>
+            <th class="p-2 border">Action</th>
         </tr>
         {% for publisher in publishers %}
         <tr class="border">
             <td class="p-2 border">{{ publisher.name }}</td>
             <td class="p-2 border">{{ publisher.address }}</td>
             <td class="p-2 border">{{ publisher.contact }}</td>
+            <td class="p-2 border">
+                <a href="{% url 'publisher_edit' publisher.id %}" class="text-blue-500 hover:underline">Edit</a>
+                <a href="{% url 'publisher_delete' publisher.id %}" class="text-red-500 hover:underline">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="p-2 border">No publishers available.</td>
         </tr>
         {% endfor %}
     </table>
+    <a href="{% url 'publisher_add' %}" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded delete-btn">Add Publisher</a>
+
+
 {% endblock %}
