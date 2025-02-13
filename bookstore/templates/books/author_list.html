@@ -5,7 +5,8 @@
 {% block content %}
 <h1 class="text-2xl font-bold mb-2" > Authors</h1>
 <table class="w-full border-collapse mt-4" >
-    <tr class="bg-gray-200" >
+    <tr class="bg-gray-500 " >
+        <th class="p-2 border" >S.N.</th>
         <th class="p-2 border" > Name</th>
         <th class="p-2 border" > Email</th>
         <th class="p-2 border">Bio</th>
@@ -13,12 +14,14 @@
     </tr>
     {% for author in authors %}
     <tr class="bg-white" >
+        <td class="p-2 border" >{{ forloop.counter }}</td>
         <td class="p-2 border" >{{ author.name }}</td>
         <td class="p-2 border" >{{ author.email }}</td>
         <td class="p-2 border" >{{ author.bio }}</td>
-        <td class="p-2 border" >
-            <a href="{% url 'author_edit' author.id %}" class="text-blue-500" >Edit</a>
-            <a href="{% url 'author_delete' author.id %}" class="text-red-500" >Delete</a>
+        <td class="p-2 border text-center " >
+            <a href="{% url 'author_edit' author.id %}" class="text-blue-500 inline-block"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a href="{% url 'author_delete' author.id %}" class="text-red-500 inline-block"><i class="fa-solid fa-trash"></i></a>
+        </td>
         </td>
     </tr>
     {% empty %}
@@ -28,4 +31,4 @@
 </table>
 <a href="{% url 'author_add' %}" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded delete-btn">Add Author</a>
 
-{% endblock %}
+{% endblock %}</svg>

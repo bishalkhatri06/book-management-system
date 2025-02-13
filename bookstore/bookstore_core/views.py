@@ -94,11 +94,40 @@ def author_delete(request, pk):
 
 # creating a view to list categories
 def category_list(request):
-    return render(request, 'books/category_list.html')
+    categories = Category.objects.all() # querying all books from the database
+    return render(request, 'books/category_list.html', {'categories': categories})
 
 # creating a view to add a new category
 def category_add(request):
-    return render(request, 'books/category_add.html')
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()  # save the new category to the database
+            return redirect('category_list')  # redirect to the list of categories
+    
+    else:
+        form = CategoryForm()
+    return render(request, 'books/category_add.html', {'form': form})
+
+# creating a view to edit a category
+def category_edit(request, pk):
+    category = Category.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect('category_list')
+    else:
+        form = CategoryForm(instance=category)
+    return render(request, 'books/category_edit.html', {'form': form, 'category': category})
+
+# creating a view to delete a category
+def category_delete(request, pk):
+    category = Category.objects.get(pk=pk)
+    if request.method == 'POST':
+        category.delete()
+        return redirect('category_list')
+    return render(request, 'books/category_delete.html', {'category': category})
 
 # Creating a View to List Books
 def book_list(request):
@@ -112,7 +141,7 @@ def book_add(request):
         form = BookForm(request.POST)
         if form.is_valid():
             form.save()  # save the new book to the database
-            return redirect('books/book_list')  # redirect to the list of books
+            return redirect('book_list')  # redirect to the list of books
     
     else:
         form = BookForm()

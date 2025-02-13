@@ -1,18 +1,118 @@
-<!-- templates/books/book_add.html -->
 {% extends 'base.html' %}
 
-{% block title %}Add a New Book{% endblock %}
-
 {% block content %}
-<div class="mt-4">
-            <a href="{% url 'book_list' %}" class="text-blue-500">Back to Book List</a>
+<div class="max-w-4xl mx-auto bg-white p-6 shadow-md rounded-lg">
+    <h1 class="text-2xl font-bold mb-4 text-center">Add a New Book</h1>
+
+    <!-- Back to Book List -->
+    <a href="{% url 'book_list' %}" class="text-blue-500">Back to Book List</a>
+
+    <!-- Form to Add a New Book -->
+
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        
+        <!-- Title -->
+        <div>
+            <label for="id_title" class="block font-semibold">Title</label>
+            {{ form.title }}
+            <!-- Optional: Display errors for this field -->
+            {% if form.title.errors %}
+                <p class="text-red-500 text-sm">{{ form.title.errors }}</p>
+            {% endif %}
+        </div>
+
+        <!-- ISBN -->
+        <div>
+            <label for="id_ISBN" class="block font-semibold">ISBN</label>
+            {{ form.ISBN }}
+            {% if form.ISBN.errors %}
+                <p class="text-red-500 text-sm">{{ form.ISBN.errors }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Publisher -->
+        <div>
+            <label for="id_publisher" class="block font-semibold">Publisher</label>
+            {{ form.publisher }}
+            {% if form.publisher.errors %}
+                <p class="text-red-500 text-sm">{{ form.publisher.errors }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Published Date -->
+        <div>
+            <label for="id_published_date" class="block font-semibold">Published Date</label>
+            {{ form.published_date }}
+            {% if form.published_date.errors %}
+                <p class="text-red-500 text-sm">{{ form.published_date.errors }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Language -->
+        <div>
+            <label for="id_language" class="block font-semibold">Language</label>
+            {{ form.language }}
+            {% if form.language.errors %}
+                <p class="text-red-500 text-sm">{{ form.language.errors }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Summary -->
+        <div>
+            <label for="id_summary" class="block font-semibold">Summary</label>
+            {{ form.summary }}
+            {% if form.summary.errors %}
+                <p class="text-red-500 text-sm">{{ form.summary.errors }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Price -->
+        <div>
+            <label for="id_price" class="block font-semibold">Price</label>
+            {{ form.price }}
+            {% if form.price.errors %}
+                <p class="text-red-500 text-sm">{{ form.price.errors }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Is Available -->
+        <div>
+            <label for="id_is_available" class="block font-semibold">Available</label>
+            {{ form.is_available }}
+            {% if form.is_available.errors %}
+                <p class="text-red-500 text-sm">{{ form.is_available.errors }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Authors (Many-to-Many) -->
+        <div>
+            <label for="id_authors" class="block font-semibold">Authors</label>
+            <select name="authors" id="id_authors" class="form-select">
+          {% for author_id, author_name in form.authors.field.choices %}
+              <option value="{{ author_id }}" {% if form.authors.value|stringformat:"s" == author_id|stringformat:"s" %}selected{% endif %}>
+            {{ author_name }}
+              </option>
+          {% endfor %}
+            </select>
+            {% if form.authors.errors %}
+          <p class="text-red-500 text-sm">{{ form.authors.errors }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Categories (Many-to-Many) -->
+        <div>
+            <label for="id_categories" class="block font-semibold">Categories</label>
+            {{ form.categories }}
+            {% if form.categories.errors %}
+                <p class="text-red-500 text-sm">{{ form.categories.errors }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Add Book
+        </button>
+    </form>
 </div>
-  <h2 class="text-2xl font-bold mb-4">Add a New Book</h2>
-  <form method="post" class="p-4 rounded shadow-md">
-      {% csrf_token %}
-      <div class="space-y-2">
-        {{ form.as_p }}
-      </div>
-      <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Add Book</button>
-  </form>
 {% endblock %}

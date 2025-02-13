@@ -52,15 +52,19 @@ class BookInventoryForm(forms.ModelForm):
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
-        # fields = ['title','ISBN','publisher','price','authors','categories']
+        fields = ['title', 'ISBN', 'publisher', 'published_date', 'language', 'summary', 'price', 'is_available', 'authors', 'categories']
 
-        fields = '__all__'
         widgets = {
             'title': forms.TextInput(attrs={'class': 'w-full p-2 border rounded'}),
+
             'ISBN': forms.TextInput(attrs={'class': 'w-full p-2 border rounded'}),
             'publisher': forms.Select(attrs={'class': 'w-full p-2 border rounded'}),
+            'published_date': forms.DateInput(attrs={'class': 'w-full p-2 border rounded'}),
+            'language': forms.TextInput(attrs={'class': 'w-full p-2 border rounded'}),
+            'summary': forms.Textarea(attrs={'class': 'w-full p-2 border rounded'}),
             'price': forms.NumberInput(attrs={'class': 'w-full p-2 border rounded'}),
-            'authors': forms.SelectMultiple(attrs={'class': 'w-full p-2 border rounded h-32'}),
-            'categories': forms.SelectMultiple(attrs={'class': 'w-full p-2 border rounded h-32'}),
+            'is_available': forms.CheckboxInput(attrs={'class': 'w-full p-2 border rounded'}),
+            'authors': forms.SelectMultiple(attrs={'class': 'w-full p-2 border rounded'}),
+            'categories': forms.SelectMultiple(attrs={'class': 'w-full p-2 border rounded'}),
         }
 
